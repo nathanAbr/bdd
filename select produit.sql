@@ -44,3 +44,16 @@ FROM commande co
 	INNER JOIN client cl ON cl.id = co.id_client
 	INNER JOIN ligne_commande l ON l.id_commande = co.id
 WHERE l.quantiteProduit > 10
+
+------------------------------------------------------------------------------------------------
+-- # AFFICHAGE INFO CLIENT QUAND ILS ONT COMMANDE PLUS DE 10 FOIS LE MEME PRODUITS TOUTES COMMANDES CONFONDU # --
+------------------------------------------------------------------------------------------------
+
+SELECT client.nom, client.prenom, produit.nom
+FROM client
+	INNER JOIN commande ON commande.id_client = client.id
+	INNER JOIN ligne_commande ON ligne_commande.id_commande = commande.id
+	INNER JOIN Produit ON produit.id = ligne_commande.id_produit
+GROUP BY client.nom, client.prenom, produit.nom
+HAVING SUM(ligne_commande.quantiteProduit) > 10
+
