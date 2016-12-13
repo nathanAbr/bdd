@@ -49,7 +49,7 @@ WHERE l.quantiteProduit > 10
 -- # AFFICHAGE INFO CLIENT QUAND ILS ONT COMMANDE PLUS DE 10 FOIS LE MEME PRODUITS TOUTES COMMANDES CONFONDU # --
 ------------------------------------------------------------------------------------------------
 
-SELECT client.nom, client.prenom, produit.nom
+SELECT DISTINCT client.nom, client.prenom
 FROM client
 	INNER JOIN commande ON commande.id_client = client.id
 	INNER JOIN ligne_commande ON ligne_commande.id_commande = commande.id
